@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="prova.example.igrejarefactor.CadastroViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".CadastroFragment">
+
+        <EditText
+            android:id="@+id/Nome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:text="@={viewModel.igreja.nome}"
+            android:inputType="textPersonName"
+            android:hint="Nome" />
+
+        <EditText
+            android:id="@+id/descricao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:text="@={viewModel.igreja.descricao}"
+            android:inputType="textPersonName"
+            android:hint="descricao" />
+
+        <EditText
+            android:id="@+id/nfieis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:text="@={viewModel.igreja.nfieis+``}"
+            android:inputType="number"
+            android:hint="nfieis" />
+
+        <EditText
+            android:id="@+id/profeta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:text="@={viewModel.igreja.profeta}"
+            android:inputType="textPersonName"
+            android:hint="profeta" />
+
+        <EditText
+            android:id="@+id/endereco"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:text="@={viewModel.igreja.endereco}"
+            android:hint="endereco" />
+
+
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cadastrar" />
+    </LinearLayout>
+</layout>

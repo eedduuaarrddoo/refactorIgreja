@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="prova.example.igrejarefactor.AlteraViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".CadastroFragment"
+        android:orientation="vertical">
+
+
+        <EditText
+            android:id="@+id/nomealt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Name"
+            android:text="@={viewModel.igreja.nome}"
+            />
+
+        <EditText
+            android:id="@+id/descricaoalt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="descricao"
+            android:text="@={viewModel.igreja.descricao}"/>
+
+        <EditText
+            android:id="@+id/nfieisalt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number"
+            android:hint="Numero de fieis"
+            android:text="@={viewModel.igreja.nfieis+``}"/>
+
+        <EditText
+            android:id="@+id/profetaalt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Profeta"
+            android:text="@={viewModel.igreja.profeta}"/>
+
+        <EditText
+            android:id="@+id/enderecoalt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="endereco"
+            android:text="@={viewModel.igreja.endereco}"/>
+
+        <Button
+            android:id="@+id/buttonaltera"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ATUALIZAR" />
+    </LinearLayout>
+</layout>
