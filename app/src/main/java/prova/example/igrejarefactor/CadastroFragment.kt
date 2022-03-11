@@ -24,7 +24,7 @@ class CadastroFragment : Fragment() {
 
         binding.button.setOnClickListener {
             viewModel.cadastraIgreja()
-        Navigation.findNavController(it).navigate(R.id.action_homeFragment_to_cadastroFragment)
+        Navigation.findNavController(it).navigate(R.id.action_cadastroFragment_to_homeFragment)
         }
 
         return binding.root

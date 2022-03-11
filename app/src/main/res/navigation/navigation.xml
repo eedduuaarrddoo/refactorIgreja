@@ -6,26 +6,28 @@
     app:startDestination="@id/cadastroFragment">
 
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="prova.example.igrejarefactor.HomeFragment"
-        tools:layout="@layout/fragment_home">
-        <action
-            android:id="@+id/action_homeFragment_to_cadastroFragment"
-            app:destination="@id/cadastroFragment" />
-    </fragment>
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="prova.example.igrejarefactor.MainActivity"
-        android:label="MainActivity" />
+        android:id="@+id/alteraFragment"
+        android:name="prova.example.igrejarefactor.AlteraFragment"
+        android:label="AlteraFragment" />
     <fragment
         android:id="@+id/cadastroFragment"
-        android:name="prova.example.igrejarefactor.CadastroFragment">
+        android:name="prova.example.igrejarefactor.CadastroFragment"
+        android:label="CadastroFragment" >
         <action
             android:id="@+id/action_cadastroFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
     <fragment
-        android:id="@+id/alteraFragment"
-        android:name="prova.example.igrejarefactor.AlteraFragment"
-        android:label="AlteraFragment" />
+        android:id="@+id/homeFragment"
+        android:name="prova.example.igrejarefactor.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_cadastroFragment"
+            app:destination="@id/cadastroFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detalhesFragment"
+        android:name="prova.example.igrejarefactor.DetalhesFragment"
+        android:label="fragment_detalhes"
+        tools:layout="@layout/fragment_detalhes" />
 </navigation>
