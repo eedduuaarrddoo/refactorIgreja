@@ -1,14 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".DetalhesFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+<variable
+    name="viewModel"
+    type="prova.example.igrejarefactor.DetalhesViewModel" />
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:context=".DetalhesFragment">
 
-</LinearLayout>
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@{viewModel.igreja.nome}" />
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:text="@{viewModel.igreja.descricao}" />
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="53dp"
+            android:text="@{viewModel.igreja.nfieis+``}" />
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="@{viewModel.igreja.profeta}" />
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="53dp"
+            android:text="@{viewModel.igreja.endereco}" />
+    </LinearLayout>
+</layout>
