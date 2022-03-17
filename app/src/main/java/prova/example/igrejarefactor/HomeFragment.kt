@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import prova.example.igrejarefactor.R
 import prova.example.igrejarefactor.databinding.FragmentHomeBinding
 
@@ -26,6 +27,25 @@ class HomeFragment : Fragment() {
             adapter.list=it
             adapter.notifyDataSetChanged()
         })
+
+
+
+        binding.recyclerView.addOnItemTouchListener(RecycleViewClickListener(binding.recyclerView, object :RecycleViewClickListener.OnItemClickListener{
+
+            override fun onItemClick(view: View, position: Int) {
+Navigation.findNavController(binding.recyclerView).navigate(HomeFragmentDirections.actionHomeFragmentToDetalhesFragment())
+
+    }
+
+    override fun onItemLongClick(view: View, position: Int) {
+        Navigation.findNavController(binding.recyclerView).navigate(HomeFragmentDirections.actionHomeFragmentToAlteraFragment())
+
+
+    }
+
+
+}))
+
 
         return binding.root
 

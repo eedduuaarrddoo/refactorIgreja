@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import prova.example.igrejarefactor.databinding.FragmentAlteraBinding
 import prova.example.igrejarefactor.databinding.FragmentCadastroBinding
 
@@ -21,6 +22,12 @@ class AlteraFragment : Fragment() {
         binding.viewModel=viewModel
 
         binding.lifecycleOwner=this
+
+        binding.buttonaltera.setOnClickListener {
+            viewModel.alteraPessoa()
+            Navigation.findNavController(it).navigate(AlteraFragmentDirections.actionAlteraFragmentToHomeFragment())
+
+        }
 
 
         return binding.root
