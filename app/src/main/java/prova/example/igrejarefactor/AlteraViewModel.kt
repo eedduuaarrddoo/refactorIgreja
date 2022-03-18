@@ -1,15 +1,12 @@
 package prova.example.igrejarefactor
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import androidx.room.Room
 import kotlinx.coroutines.launch
 import prova.example.igrejarefactor.igreja.IgrejaDB
 
-class AlteraViewModel(application: Application): AndroidViewModel(application) {
+class AlteraViewModel(application: Application, id:Long): AndroidViewModel(application) {
 
     private val db: IgrejaDB by lazy {
         Room.databaseBuilder(
@@ -23,10 +20,19 @@ class AlteraViewModel(application: Application): AndroidViewModel(application) {
 
     init {
         viewModelScope.launch{
-    igreja = db.igrejaDao().buscarPorId(1)
+    igreja = db.igrejaDao().buscarPorId(id )
     }}
     fun alteraPessoa(){
         viewModelScope.launch{
         db.igrejaDao().editar(igreja.value!!)
     }}
+    class AlteraViewModelFactory(val application: Application,val id: Long):ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(AlteraViewModel::class.java)) {
+                return AlteraViewModel(application, id) as T
+            }
+            throw IllegalArgumentException("Unknown ViewModel class")
+        }
+    }
+
 }

@@ -1,12 +1,13 @@
 package prova.example.igrejarefactor
 
+import android.app.Application
 import android.os.Bundle
+import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.navArgs
 import prova.example.igrejarefactor.databinding.FragmentDetalhesBinding
 
 
@@ -16,13 +17,36 @@ lateinit var viewModel: DetalhesViewModel
 
 
 override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    viewModel= ViewModelProvider(this).get(DetalhesViewModel::class.java)
+    val args:DetalhesFragmentArgs by navArgs()
+
+
     binding=DataBindingUtil.inflate(inflater,R.layout.fragment_detalhes,container, false)
+    val viewModelFactory = DetalhesViewModel.DetalhesFragmentViewModelFactory(requireActivity().application,args.id)
+    viewModel= ViewModelProvider(this,viewModelFactory).get(DetalhesViewModel::class.java)
     binding.viewModel=viewModel
     binding.lifecycleOwner=this
 
+setHasOptionsMenu(true)
+
     return binding.root
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+    inflater.inflate(R.menu.ajudamenu,menu)
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId==R.id.menuajuda){
+        Toast.makeText(context,"ajuda detalhes",Toast.LENGTH_SHORT)
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+
+
 
 
 }

@@ -13,7 +13,7 @@ class Igreja (
 
 ){
     @PrimaryKey(autoGenerate = true)
-    var id = 0
+    var id:Long = 0
     constructor() :this ("", "", 0, "", "")
 }
 

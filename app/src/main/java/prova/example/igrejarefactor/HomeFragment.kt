@@ -1,10 +1,9 @@
 package prova.example.igrejarefactor
 
 import android.os.Bundle
+import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -33,24 +32,39 @@ class HomeFragment : Fragment() {
         binding.recyclerView.addOnItemTouchListener(RecycleViewClickListener(binding.recyclerView, object :RecycleViewClickListener.OnItemClickListener{
 
             override fun onItemClick(view: View, position: Int) {
-Navigation.findNavController(binding.recyclerView).navigate(HomeFragmentDirections.actionHomeFragmentToDetalhesFragment())
+Navigation.findNavController(binding.recyclerView).navigate(HomeFragmentDirections.actionHomeFragmentToDetalhesFragment(adapter.list[position].id   ))
 
     }
 
     override fun onItemLongClick(view: View, position: Int) {
-        Navigation.findNavController(binding.recyclerView).navigate(HomeFragmentDirections.actionHomeFragmentToAlteraFragment())
+        Navigation.findNavController(binding.recyclerView).navigate(HomeFragmentDirections.actionHomeFragmentToAlteraFragment(adapter.list[position].id  ))
 
 
     }
 
 
 }))
-
+        setHasOptionsMenu(true)
 
         return binding.root
 
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.ajudamenu,menu)
 
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId==R.id.menuajuda){
+            Toast.makeText(context,"IGREJAS CADASTRADAS", Toast.LENGTH_SHORT)
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+
 
 }

@@ -1,14 +1,12 @@
 package prova.example.igrejarefactor
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import androidx.room.Room
 import kotlinx.coroutines.launch
 import prova.example.igrejarefactor.igreja.IgrejaDB
 
-class DetalhesViewModel (application: Application): AndroidViewModel(application){
+class DetalhesViewModel (application: Application, id:Long): AndroidViewModel(application){
     lateinit var igreja : LiveData<Igreja>
 
 
@@ -24,9 +22,18 @@ class DetalhesViewModel (application: Application): AndroidViewModel(application
 
     init{
     viewModelScope.launch {
-        igreja=db.igrejaDao().buscarPorId(3)
+        igreja=db.igrejaDao().buscarPorId(id )
     }
 }
+
+    class DetalhesFragmentViewModelFactory(val application: Application, val id:Long) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(DetalhesViewModel::class.java)) {
+                return DetalhesViewModel(application, id) as T
+            }
+            throw IllegalArgumentException("Unknown ViewModel class")
+        }
+    }
 
 
 }

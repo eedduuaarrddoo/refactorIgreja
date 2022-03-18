@@ -1,10 +1,9 @@
 package prova.example.igrejarefactor
 
 import android.os.Bundle
+import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -26,8 +25,22 @@ class CadastroFragment : Fragment() {
             viewModel.cadastraIgreja()
         Navigation.findNavController(it).navigate(CadastroFragmentDirections.actionCadastroFragmentToHomeFragment())
         }
-
+        setHasOptionsMenu(true)
         return binding.root
     }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.ajudamenu,menu)
+
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId==R.id.menuajuda){
+            Toast.makeText(context,"insira os dados de cadastro", Toast.LENGTH_SHORT)
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
 
 }
