@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-class Igreja (
+data class Igreja (
     var nome: String,
     var descricao: String,
     var nfieis: Int,

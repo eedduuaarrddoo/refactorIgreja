@@ -22,9 +22,9 @@ class HomeFragment : Fragment() {
 
         binding.recyclerView.adapter= adapter
 
-        viewModel.list.observe(viewLifecycleOwner, Observer {
-            adapter.list=it
-            adapter.notifyDataSetChanged()
+        viewModel.list.observe(viewLifecycleOwner, Observer {list->
+            adapter.submitList(list)
+
         })
 
 
@@ -32,12 +32,12 @@ class HomeFragment : Fragment() {
         binding.recyclerView.addOnItemTouchListener(RecycleViewClickListener(binding.recyclerView, object :RecycleViewClickListener.OnItemClickListener{
 
             override fun onItemClick(view: View, position: Int) {
-Navigation.findNavController(binding.recyclerView).navigate(HomeFragmentDirections.actionHomeFragmentToDetalhesFragment(adapter.list[position].id   ))
+Navigation.findNavController(binding.recyclerView).navigate(HomeFragmentDirections.actionHomeFragmentToDetalhesFragment(adapter.currentList[position].id   ))
 
     }
 
     override fun onItemLongClick(view: View, position: Int) {
-        Navigation.findNavController(binding.recyclerView).navigate(HomeFragmentDirections.actionHomeFragmentToAlteraFragment(adapter.list[position].id  ))
+        Navigation.findNavController(binding.recyclerView).navigate(HomeFragmentDirections.actionHomeFragmentToAlteraFragment(adapter.currentList[position].id  ))
 
 
     }

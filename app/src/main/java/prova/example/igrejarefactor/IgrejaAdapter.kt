@@ -3,13 +3,16 @@ package prova.example.igrejarefactor
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil.bind
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
-class IgrejaAdapter: RecyclerView.Adapter<IgrejaAdapter.IgrejaViewHolder>() {
+class IgrejaAdapter:ListAdapter<Igreja,IgrejaAdapter.IgrejaViewHolder>(IgrejaDiffCallBack())  {
 
-   var list:List<Igreja> = ArrayList()
+
 
 
 
@@ -20,15 +23,12 @@ class IgrejaAdapter: RecyclerView.Adapter<IgrejaAdapter.IgrejaViewHolder>() {
 
     override fun onBindViewHolder(holder: IgrejaViewHolder, position: Int) {
 
-        val igreja= list [position]
+        val igreja= currentList [position]
         holder.bind(holder, igreja)
     }
 
 
-    override fun getItemCount(): Int {
-        return list.size
 
-    }
 
     class IgrejaViewHolder private constructor(itemView: View) :RecyclerView.ViewHolder(itemView){
     var nomeTextview = itemView.findViewById<TextView>(R.id.nomeigreja1)
@@ -52,5 +52,15 @@ class IgrejaAdapter: RecyclerView.Adapter<IgrejaAdapter.IgrejaViewHolder>() {
     }
 
 
+
+}
+class IgrejaDiffCallBack:DiffUtil.ItemCallback<Igreja>(){
+    override fun areItemsTheSame(oldItem: Igreja, newItem: Igreja): Boolean {
+     return oldItem.id==newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: Igreja, newItem: Igreja): Boolean {
+        return oldItem == newItem
+    }
 
 }
