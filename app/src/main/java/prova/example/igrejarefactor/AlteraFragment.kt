@@ -25,11 +25,15 @@ class AlteraFragment : Fragment() {
 
         binding.lifecycleOwner=this
 
-        binding.buttonaltera.setOnClickListener {
-            viewModel.alteraPessoa()
-            Navigation.findNavController(it).navigate(AlteraFragmentDirections.actionAlteraFragmentToHomeFragment())
 
-        }
+        viewModel.eventAltera.observe(viewLifecycleOwner,{  hasChanged ->
+            if (hasChanged==true){
+                Navigation.findNavController(requireView()).navigate(AlteraFragmentDirections.actionAlteraFragmentToHomeFragment())
+            }
+    viewModel.resetGatilho()
+
+        })
+
 
         setHasOptionsMenu(true)
         return binding.root

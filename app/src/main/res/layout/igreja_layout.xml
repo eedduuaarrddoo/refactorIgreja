@@ -8,11 +8,24 @@
 
 
     <TextView
-        android:id="@+id/nomeigreja"
+        android:id="@+id/nomeigreja1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="nome da igreja" />
-
-
+    <TextView
+        android:id="@+id/descricao1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="descricao" />
+    <TextView
+        android:id="@+id/nfieis1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="quantidade de fieis" />
+    <TextView
+        android:id="@+id/profeta1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="nome da igreja" />
 
 </LinearLayout>

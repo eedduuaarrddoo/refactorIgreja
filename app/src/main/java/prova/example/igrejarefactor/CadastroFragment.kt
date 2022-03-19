@@ -21,10 +21,16 @@ class CadastroFragment : Fragment() {
     binding.viewModel=viewModel
     binding.lifecycleOwner= this
 
-        binding.button.setOnClickListener {
-            viewModel.cadastraIgreja()
-        Navigation.findNavController(it).navigate(CadastroFragmentDirections.actionCadastroFragmentToHomeFragment())
-        }
+
+
+        viewModel.eventCadastra.observe(viewLifecycleOwner,{ gatilho ->
+            if(gatilho){
+                Navigation.findNavController(requireView()).navigate(CadastroFragmentDirections.actionCadastroFragmentToHomeFragment())
+            }
+            viewModel.resetGatilho()
+        })
+
+
         setHasOptionsMenu(true)
         return binding.root
     }

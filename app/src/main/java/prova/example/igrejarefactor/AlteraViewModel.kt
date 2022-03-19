@@ -17,15 +17,27 @@ class AlteraViewModel(application: Application, id:Long): AndroidViewModel(appli
     }
 
     lateinit var igreja : LiveData<Igreja>
-
+    private var _eventAltera = MutableLiveData<Boolean>(false)
+   val eventAltera:LiveData<Boolean>
+   get()=_eventAltera
     init {
         viewModelScope.launch{
     igreja = db.igrejaDao().buscarPorId(id )
     }}
-    fun alteraPessoa(){
+
+
+
+    fun alteraIgreja(){
+
         viewModelScope.launch{
         db.igrejaDao().editar(igreja.value!!)
-    }}
+    }
+        _eventAltera.value = true
+    }
+
+
+
+
     class AlteraViewModelFactory(val application: Application,val id: Long):ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(AlteraViewModel::class.java)) {
@@ -34,5 +46,9 @@ class AlteraViewModel(application: Application, id:Long): AndroidViewModel(appli
             throw IllegalArgumentException("Unknown ViewModel class")
         }
     }
+    fun resetGatilho(){
+        _eventAltera.value=false
+    }
+
 
 }
