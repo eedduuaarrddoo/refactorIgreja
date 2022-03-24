@@ -1,19 +1,14 @@
 package prova.example.igrejarefactor
-
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-
 import android.widget.TextView
-import androidx.databinding.DataBindingUtil.bind
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import prova.example.igrejarefactor.databinding.IgrejaLayoutBinding
 
-class IgrejaAdapter:ListAdapter<Igreja,IgrejaAdapter.IgrejaViewHolder>(IgrejaDiffCallBack())  {
-
-
-
+class IgrejaAdapter :ListAdapter<Igreja, IgrejaAdapter.IgrejaViewHolder>(IgrejaDiffCallBack()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IgrejaViewHolder {
@@ -22,45 +17,42 @@ class IgrejaAdapter:ListAdapter<Igreja,IgrejaAdapter.IgrejaViewHolder>(IgrejaDif
     }
 
     override fun onBindViewHolder(holder: IgrejaViewHolder, position: Int) {
+        val igreja = currentList[position]
+        holder.bind(igreja)
 
-        val igreja= currentList [position]
-        holder.bind(holder, igreja)
     }
 
 
+    class IgrejaViewHolder private constructor(var binding: IgrejaLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
 
 
-    class IgrejaViewHolder private constructor(itemView: View) :RecyclerView.ViewHolder(itemView){
-    var nomeTextview = itemView.findViewById<TextView>(R.id.nomeigreja1)
-    var descricaoTextview= itemView.findViewById<TextView>(R.id.descricao1)
-    var profetaTextview= itemView.findViewById<TextView>(R.id.profeta1)
+        fun bind(igreja: Igreja) {
+binding.igreja= igreja
 
-        fun bind(holder: IgrejaViewHolder, igreja: Igreja) {
-            holder.nomeTextview.text = igreja.nome
-            holder.descricaoTextview.text = igreja.descricao
-            holder.profetaTextview.text = igreja.profeta
         }
+
         companion object {
-             fun from(parent: ViewGroup): IgrejaViewHolder {
-                val view =
-                    LayoutInflater.from(parent.context).inflate(R.layout.igreja_layout, parent, false)
-                return IgrejaViewHolder(view)
+            fun from(parent: ViewGroup): IgrejaViewHolder {
+
+                val binding: IgrejaLayoutBinding =DataBindingUtil.inflate(LayoutInflater.from(parent.context),R.layout.igreja_layout,parent,false)
+
+                return IgrejaViewHolder(binding)
             }
         }
 
-
     }
-
-
-
 }
+
 class IgrejaDiffCallBack:DiffUtil.ItemCallback<Igreja>(){
-    override fun areItemsTheSame(oldItem: Igreja, newItem: Igreja): Boolean {
-     return oldItem.id==newItem.id
-    }
+            override fun areItemsTheSame(oldItem: Igreja, newItem: Igreja): Boolean {
+            return oldItem.id == newItem.id
+            }
 
-    override fun areContentsTheSame(oldItem: Igreja, newItem: Igreja): Boolean {
-        return oldItem == newItem
-    }
+            override fun areContentsTheSame(oldItem: Igreja, newItem: Igreja): Boolean {
+                return oldItem == newItem
+                            }
 
-}
+        }
+
+
+

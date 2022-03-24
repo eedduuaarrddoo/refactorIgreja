@@ -1,31 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+<variable
+    name="igreja"
+    type="prova.example.igrejarefactor.Igreja" />
+    </data>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical">
 
 
-    <TextView
-        android:id="@+id/nomeigreja1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="nome da igreja" />
-    <TextView
-        android:id="@+id/descricao1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="descricao" />
-    <TextView
-        android:id="@+id/nfieis1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="quantidade de fieis" />
-    <TextView
-        android:id="@+id/profeta1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="nome da igreja" />
+        <TextView
 
-</LinearLayout>
+            android:text="@{igreja.nome}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="nome da igreja" />
+
+        <TextView
+
+            android:text="@{igreja.descricao}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="descricao" />
+
+        <TextView
+            app:nfieisAsText="@{igreja}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="quantidade de fieis" />
+
+        <TextView
+
+            android:text="@{igreja.profeta}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="nome da igreja" />
+
+    </LinearLayout>
+</layout>

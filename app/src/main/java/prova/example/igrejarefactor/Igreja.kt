@@ -15,5 +15,9 @@ data class Igreja (
     @PrimaryKey(autoGenerate = true)
     var id:Long = 0
     constructor() :this ("", "", 0, "", "")
+fun converteNfieis():String{
+    return (nfieis.toString())
+}
+
 }
 
