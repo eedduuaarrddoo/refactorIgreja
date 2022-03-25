@@ -15,7 +15,7 @@ class IgrejaRepository(private val igrejaDao: IgrejaDao) {
         igrejaDao.editar(i)
     }
     suspend fun buscarPorID(id:Long):Igreja{
-        return igrejaDao.buscarPorId(id)
+        return igrejaDao.buscarPorId(id);
     }
 
 

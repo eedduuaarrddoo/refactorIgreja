@@ -1,36 +1,29 @@
 package prova.example.igrejarefactor
 
-import android.app.Application
 import androidx.lifecycle.*
-import androidx.room.Room
 import kotlinx.coroutines.launch
-import prova.example.igrejarefactor.igreja.AppDataBase
-
-
-class DetalhesViewModel (application: Application, id:Long): AndroidViewModel(application){
-    var igreja= MutableLiveData<Igreja>()
 
 
 
-
-    private val db: AppDataBase by lazy {
-        Room.databaseBuilder(
-            application.applicationContext,
-            AppDataBase::class.java,
-            "pessoas.sqlite")
-            .build()
-    }
+class DetalhesViewModel (val repository: IgrejaRepository,val id: Long):ViewModel() {
+    var _igreja= MutableLiveData<Igreja>()
+    val igreja : LiveData<Igreja>
+    get()= _igreja
 
     init{
-    viewModelScope.launch {
-        igreja.value=db.igrejaDao().buscarPorId(id)
+buscaIgreja()
     }
-}
 
-    class DetalhesFragmentViewModelFactory(val application: Application, val id:Long) : ViewModelProvider.Factory {
+
+    fun buscaIgreja() {
+        viewModelScope.launch {
+            _igreja.value = repository.buscarPorID(id)
+        }
+    }
+    class detalheFactory(val repository: IgrejaRepository, val id:Long) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(DetalhesViewModel::class.java)) {
-                return DetalhesViewModel(application, id) as T
+                return DetalhesViewModel(repository, id) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class")
         }

@@ -19,7 +19,7 @@ class HomeFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,false)
-       val factory = HomeViewModel.Factory((requireActivity().application as IgrejaApplication).repository)
+       val factory = HomeViewModel.homeFactory((requireActivity().application as IgrejaApplication).repository)
         viewModel= ViewModelProvider(this, factory)[HomeViewModel::class.java]
 
         val adapter = IgrejaAdapter()

@@ -7,35 +7,31 @@ import kotlinx.coroutines.launch
 import prova.example.igrejarefactor.igreja.AppDataBase
 
 
-class AlteraViewModel(application: Application, id:Long): AndroidViewModel(application) {
-var igreja= MutableLiveData<Igreja>()
+class AlteraViewModel(val repository: IgrejaRepository,val id: Long):ViewModel () {
+ private var _igreja= MutableLiveData<Igreja>()
+    val igreja:LiveData<Igreja>
+    get()=_igreja
 
     private var _eventAltera = MutableLiveData<Boolean>(false)
     val eventAltera:LiveData<Boolean>
         get()=_eventAltera
 
-    private val db: AppDataBase by lazy {
-        Room.databaseBuilder(
-            application.applicationContext,
-            AppDataBase::class.java,
-            "pessoas.sqlite")
-            .build()
-    }
-
 
     init {
+buscarIgreja()
 
-        viewModelScope.launch{
-    igreja.value= db.igrejaDao().buscarPorId(id)
     }
+fun buscarIgreja(){
+    viewModelScope.launch{
+        _igreja.value= repository.buscarPorID(id)
     }
-
+}
 
 
     fun alteraIgreja(){
 
         viewModelScope.launch{
-        db.igrejaDao().editar(igreja.value!!)
+        repository.editar(igreja.value!!)
     }
         _eventAltera.value = true
     }
@@ -43,10 +39,10 @@ var igreja= MutableLiveData<Igreja>()
 
 
 
-    class AlteraViewModelFactory(val application: Application,val id: Long):ViewModelProvider.Factory {
+    class AlteraFactory(val repository: IgrejaRepository,val id: Long):ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(AlteraViewModel::class.java)) {
-                return AlteraViewModel(application, id) as T
+                return AlteraViewModel(repository , id) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class")
         }

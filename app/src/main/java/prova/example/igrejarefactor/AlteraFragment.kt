@@ -19,7 +19,7 @@ class AlteraFragment : Fragment() {
 
         binding=DataBindingUtil.inflate(inflater,R.layout.fragment_altera,container,false)
         val args:AlteraFragmentArgs by navArgs()
-        val viewModelFactory = AlteraViewModel.AlteraViewModelFactory(requireActivity().application,args.id)
+        val viewModelFactory = AlteraViewModel.AlteraFactory((requireActivity().application as IgrejaApplication).repository, args.id)
         viewModel=ViewModelProvider(this,viewModelFactory).get(AlteraViewModel::class.java)
         binding.viewModel=viewModel
 

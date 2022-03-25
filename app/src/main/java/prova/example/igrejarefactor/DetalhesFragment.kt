@@ -1,6 +1,6 @@
 package prova.example.igrejarefactor
 
-import android.app.Application
+
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -17,13 +17,18 @@ lateinit var viewModel: DetalhesViewModel
 
 
 override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+
     val args:DetalhesFragmentArgs by navArgs()
 
-
     binding=DataBindingUtil.inflate(inflater,R.layout.fragment_detalhes,container, false)
-    val viewModelFactory = DetalhesViewModel.DetalhesFragmentViewModelFactory(requireActivity().application,args.id)
-    viewModel= ViewModelProvider(this,viewModelFactory).get(DetalhesViewModel::class.java)
+
+    val viewModelFactory = DetalhesViewModel.detalheFactory((requireActivity().application as IgrejaApplication).repository,args.id)
+
+    viewModel= ViewModelProvider(this,viewModelFactory)[DetalhesViewModel::class.java]
+
     binding.viewModel=viewModel
+
     binding.lifecycleOwner=this
 
 setHasOptionsMenu(true)

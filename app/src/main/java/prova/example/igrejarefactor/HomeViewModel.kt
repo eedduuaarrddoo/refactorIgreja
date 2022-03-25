@@ -9,7 +9,7 @@ class HomeViewModel(repository: IgrejaRepository):ViewModel(){
 
     var list: LiveData<List<Igreja>> = repository.list.asLiveData()
 
-    class Factory(val repository: IgrejaRepository) : ViewModelProvider.Factory {
+    class homeFactory(val repository: IgrejaRepository) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
                 return HomeViewModel(repository) as T
