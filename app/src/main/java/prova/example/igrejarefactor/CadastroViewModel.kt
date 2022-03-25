@@ -21,7 +21,7 @@ class CadastroViewModel(application: Application): AndroidViewModel(application)
         Room.databaseBuilder(
             application.applicationContext,
             AppDataBase::class.java,
-            "igreja.sqlite")
+            "pessoas.sqlite")
             .build()
     }
 

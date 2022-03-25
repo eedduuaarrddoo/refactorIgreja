@@ -4,7 +4,8 @@ import androidx.lifecycle.LiveData
 import kotlinx.coroutines.flow.Flow
 
 class IgrejaRepository(private val igrejaDao: IgrejaDao) {
-    val list:Flow<List<Igreja>> = igrejaDao.buscarTodos()
+
+    var list:Flow<List<Igreja>> = igrejaDao.buscarTodos()
 
   suspend fun cadastro(i:Igreja){
         igrejaDao.cadastrar(i)
