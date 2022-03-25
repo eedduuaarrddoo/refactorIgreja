@@ -15,7 +15,7 @@ interface IgrejaDao {
     @Query("SELECT * from Igreja")
     fun buscarTodos(): LiveData<List<Igreja>>
     @Query("SELECT * from igreja where id=:id")
-   fun buscarPorId(id:Long):LiveData<Igreja>
+  suspend fun buscarPorId(id:Long):Igreja
     @Query("DELETE FROM Igreja")
     fun excluirTodos()
 

@@ -7,7 +7,7 @@ import kotlinx.coroutines.launch
 import prova.example.igrejarefactor.igreja.IgrejaDB
 
 class DetalhesViewModel (application: Application, id:Long): AndroidViewModel(application){
-    lateinit var igreja : LiveData<Igreja>
+    var igreja= MutableLiveData<Igreja>()
 
 
 
@@ -22,7 +22,7 @@ class DetalhesViewModel (application: Application, id:Long): AndroidViewModel(ap
 
     init{
     viewModelScope.launch {
-        igreja=db.igrejaDao().buscarPorId(id )
+        igreja.value=db.igrejaDao().buscarPorId(id)
     }
 }
 

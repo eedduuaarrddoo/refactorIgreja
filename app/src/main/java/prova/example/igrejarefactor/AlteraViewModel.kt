@@ -7,6 +7,11 @@ import kotlinx.coroutines.launch
 import prova.example.igrejarefactor.igreja.IgrejaDB
 
 class AlteraViewModel(application: Application, id:Long): AndroidViewModel(application) {
+var igreja= MutableLiveData<Igreja>()
+
+    private var _eventAltera = MutableLiveData<Boolean>(false)
+    val eventAltera:LiveData<Boolean>
+        get()=_eventAltera
 
     private val db: IgrejaDB by lazy {
         Room.databaseBuilder(
@@ -16,14 +21,13 @@ class AlteraViewModel(application: Application, id:Long): AndroidViewModel(appli
             .build()
     }
 
-    lateinit var igreja : LiveData<Igreja>
-    private var _eventAltera = MutableLiveData<Boolean>(false)
-   val eventAltera:LiveData<Boolean>
-   get()=_eventAltera
+
     init {
+
         viewModelScope.launch{
-    igreja = db.igrejaDao().buscarPorId(id )
-    }}
+    igreja.value= db.igrejaDao().buscarPorId(id)
+    }
+    }
 
 
 
@@ -46,6 +50,7 @@ class AlteraViewModel(application: Application, id:Long): AndroidViewModel(appli
             throw IllegalArgumentException("Unknown ViewModel class")
         }
     }
+
     fun resetGatilho(){
         _eventAltera.value=false
     }
