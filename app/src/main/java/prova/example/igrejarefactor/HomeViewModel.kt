@@ -1,24 +1,24 @@
 package prova.example.igrejarefactor
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.*
 import androidx.room.Room
-import prova.example.igrejarefactor.igreja.IgrejaDB
 
-class HomeViewModel(application: Application): AndroidViewModel(application) {
-    var list: LiveData<List<Igreja>>
 
-    private val db:IgrejaDB by lazy {
-        Room.databaseBuilder(
-            application.applicationContext,
-            IgrejaDB::class.java,
-            "pessoas.sqlite")
-            .build()
+class HomeViewModel(repository: IgrejaRepository):ViewModel(){
+
+    var list: LiveData<List<Igreja>> = repository.list.asLiveData()
+
+    class Factory(val repository: IgrejaRepository) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(HomeViewModel::class.java)) {
+                return HomeViewModel(repository) as T
+            }
+            throw IllegalArgumentException("Unknown ViewModel class")
+        }
     }
 
 
-    init {
-        list= db.igrejaDao().buscarTodos()
-    }
+
+
 }

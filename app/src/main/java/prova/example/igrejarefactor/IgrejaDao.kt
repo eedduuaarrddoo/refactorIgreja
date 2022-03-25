@@ -2,6 +2,7 @@ package prova.example.igrejarefactor
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 import prova.example.igrejarefactor.Igreja
 
 @Dao
@@ -13,7 +14,7 @@ interface IgrejaDao {
     @Delete
     suspend fun excluir(i: Igreja)
     @Query("SELECT * from Igreja")
-    fun buscarTodos(): LiveData<List<Igreja>>
+    fun buscarTodos(): Flow<List<Igreja>>
     @Query("SELECT * from igreja where id=:id")
   suspend fun buscarPorId(id:Long):Igreja
     @Query("DELETE FROM Igreja")

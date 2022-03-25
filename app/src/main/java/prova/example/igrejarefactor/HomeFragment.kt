@@ -16,8 +16,10 @@ class HomeFragment : Fragment() {
     lateinit var viewModel: HomeViewModel
     lateinit var binding: FragmentHomeBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,false)
-       viewModel=ViewModelProvider(this).get(HomeViewModel::class.java)
+       val factory = HomeViewModel.Factory((requireActivity().application as IgrejaApplication).repository)
+        viewModel= ViewModelProvider(this, factory)[HomeViewModel::class.java]
        val adapter = IgrejaAdapter()
 
         binding.recyclerView.adapter= adapter

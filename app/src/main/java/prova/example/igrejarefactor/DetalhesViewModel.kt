@@ -4,7 +4,8 @@ import android.app.Application
 import androidx.lifecycle.*
 import androidx.room.Room
 import kotlinx.coroutines.launch
-import prova.example.igrejarefactor.igreja.IgrejaDB
+import prova.example.igrejarefactor.igreja.AppDataBase
+
 
 class DetalhesViewModel (application: Application, id:Long): AndroidViewModel(application){
     var igreja= MutableLiveData<Igreja>()
@@ -12,10 +13,10 @@ class DetalhesViewModel (application: Application, id:Long): AndroidViewModel(ap
 
 
 
-    private val db: IgrejaDB by lazy {
+    private val db: AppDataBase by lazy {
         Room.databaseBuilder(
             application.applicationContext,
-            IgrejaDB::class.java,
+            AppDataBase::class.java,
             "pessoas.sqlite")
             .build()
     }
