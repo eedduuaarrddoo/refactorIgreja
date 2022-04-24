@@ -16,7 +16,8 @@ class CadastroFragment : Fragment() {
     lateinit var binding:FragmentCadastroBinding
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_cadastro,container,false)
-    viewModel=ViewModelProvider(this).get(CadastroViewModel::class.java)
+    val factory = CadastroViewModel.CadastraFactory((requireActivity().application as IgrejaApplication).repository)
+        viewModel= ViewModelProvider(this, factory)[CadastroViewModel::class.java]
 
     binding.viewModel=viewModel
     binding.lifecycleOwner= this
@@ -26,8 +27,9 @@ class CadastroFragment : Fragment() {
         viewModel.eventCadastra.observe(viewLifecycleOwner,{ gatilho ->
             if(gatilho){
                 Navigation.findNavController(requireView()).navigate(CadastroFragmentDirections.actionCadastroFragmentToHomeFragment())
+                viewModel.resetGatilho()
             }
-            viewModel.resetGatilho()
+
         })
 
 

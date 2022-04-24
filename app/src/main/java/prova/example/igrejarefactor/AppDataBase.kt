@@ -24,7 +24,6 @@ companion object{
             .fallbackToDestructiveMigration()
             .build()
 
-
 }
 
 }

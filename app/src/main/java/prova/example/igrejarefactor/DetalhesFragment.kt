@@ -29,7 +29,7 @@ override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, saved
 
     binding.viewModel=viewModel
 
-    binding.lifecycleOwner=this
+    binding.lifecycleOwner= viewLifecycleOwner
 
 setHasOptionsMenu(true)
 

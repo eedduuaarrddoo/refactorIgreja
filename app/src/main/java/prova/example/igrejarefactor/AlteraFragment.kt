@@ -23,14 +23,15 @@ class AlteraFragment : Fragment() {
         viewModel=ViewModelProvider(this,viewModelFactory).get(AlteraViewModel::class.java)
         binding.viewModel=viewModel
 
-        binding.lifecycleOwner=this
+        binding.lifecycleOwner=viewLifecycleOwner
 
 
         viewModel.eventAltera.observe(viewLifecycleOwner,{  hasChanged ->
             if (hasChanged==true){
                 Navigation.findNavController(requireView()).navigate(AlteraFragmentDirections.actionAlteraFragmentToHomeFragment())
+                viewModel.resetGatilho()
             }
-    viewModel.resetGatilho()
+    
 
         })
 

@@ -9,6 +9,8 @@ import prova.example.igrejarefactor.Igreja
 interface IgrejaDao {
     @Insert
     suspend fun cadastrar(i: Igreja)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertRemote(estado: List<Igreja>)
     @Update
     suspend fun editar(i: Igreja)
     @Delete
