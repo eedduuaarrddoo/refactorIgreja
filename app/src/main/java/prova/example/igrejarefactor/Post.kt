@@ -2,7 +2,7 @@ package prova.example.igrejarefactor
 
 import androidx.room.PrimaryKey
 
-class Post (var nome: String,
+data  class Post (var nome: String,
             var descricao: String,
             var nfieis: Int,
             var profeta: String,
