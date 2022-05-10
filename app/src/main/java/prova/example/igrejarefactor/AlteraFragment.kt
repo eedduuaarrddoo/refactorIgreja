@@ -8,9 +8,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
+import dagger.hilt.android.AndroidEntryPoint
 import prova.example.igrejarefactor.databinding.FragmentAlteraBinding
 import prova.example.igrejarefactor.databinding.FragmentCadastroBinding
 
+@AndroidEntryPoint
 class AlteraFragment : Fragment() {
     lateinit var viewModel: AlteraViewModel
     lateinit var binding: FragmentAlteraBinding
